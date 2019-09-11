@@ -25,22 +25,23 @@ public class AddCustomerDetails {
 
 	@Given("user click on add customer button")
 	public void user_click_on_add_customer_button() {
-		driver.findElement(By.xpath("(//a[text()='Add Customer'])[1]")).click();    
+		driver.findElement(By.xpath("//a[text()='Add Tariff Plan']")).click();    
 
 	}
 
 	@When("user enters all the field with valid data.")
 	public void user_enters_all_the_field_with_valid_data(io.cucumber.datatable.DataTable cusDetails) {
-	List<String> datas = cusDetails.asList(String.class);
+	List<List<String>> datas = cusDetails.asLists(String.class);
 		
-		driver.findElement(By.xpath("//label[@for='done']")).click();
-		driver.findElement(By.id("fname")).sendKeys(datas.get(0));
-		driver.findElement(By.id("lname")).sendKeys(datas.get(1));
-		driver.findElement(By.id("email")).sendKeys(datas.get(2));
-		driver.findElement(By.name("addr")).sendKeys(datas.get(3));
-		driver.findElement(By.id("telephoneno")).sendKeys(datas.get(4));
+		
+		driver.findElement(By.id("rental1")).sendKeys(datas.get(2).get(0));
+		driver.findElement(By.id("local_minutes")).sendKeys(datas.get(1).get(1));
+		driver.findElement(By.id("inter_minutes")).sendKeys(datas.get(1).get(1));
+		driver.findElement(By.name("sms_pack")).sendKeys(datas.get(3).get(2));
+		driver.findElement(By.id("minutes_charges")).sendKeys(datas.get(4).get(3));
+		driver.findElement(By.id("inter_charges")).sendKeys(datas.get(3).get(4));
+		driver.findElement(By.id("sms_charges")).sendKeys(datas.get(2).get(5));
 	}
-
 	@When("user clicks on submit button")
 	public void user_clicks_on_submit_button() {
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
